@@ -8,8 +8,8 @@ namespace BEUEjercicio.Utils
 {
     public enum Tipo
     {
-        P = 0,
-        S,
-        T
+        Primera = 0,
+        Segunda = 1,
+        Tercera = 2,
     }
 }

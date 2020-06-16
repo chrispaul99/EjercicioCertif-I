@@ -8,9 +8,9 @@ namespace BEUEjercicio.Utils
 {
     public enum Estados
     {
-        C,
-        E,
-        A,
-        F
+        Creada=1,
+        En_proceso=2,
+        Anulada=3,
+        Finalizada=4
     }
 }

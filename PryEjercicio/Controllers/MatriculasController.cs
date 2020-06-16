@@ -15,7 +15,6 @@ namespace PryEjercicio.Controllers
     public class MatriculasController : Controller
     {
         private Entities db = new Entities();
-
         // GET: Matriculas
         public ActionResult Index()
         {
@@ -41,10 +40,8 @@ namespace PryEjercicio.Controllers
         // GET: Matriculas/Create
         public ActionResult Create()
         {
-            var tipo = Enum.GetValues(typeof(Tipo)).Cast<Tipo>().Select(v => v).ToList();
-            ViewBag.tipo = new SelectList(tipo, "tipo");
-            var estado = Enum.GetValues(typeof(Estados)).Cast<Estados>().Select(v => v).ToList();
-            ViewBag.estado = new SelectList(estado, "estado");
+            ViewBag.tipo = new SelectList(MatriculaBLL.ListEnum("tipo"));
+            ViewBag.estado = new SelectList(MatriculaBLL.ListEnum("estado"));
             ViewBag.idalumno = new SelectList(AlumnoBLL.List(), "idalumno", "nombres");
             ViewBag.idmateria = new SelectList(MateriaBLL.List(), "idmateria", "nombre");
             return View();
@@ -59,10 +56,13 @@ namespace PryEjercicio.Controllers
         {
             if (ModelState.IsValid)
             {
+                matricula = MatriculaBLL.TransforEnumCreate(matricula);
                 MatriculaBLL.Create(matricula);
                 return RedirectToAction("Index");
             }
-
+            MatriculaBLL.TransforEnum(matricula);
+            ViewBag.tipo = new SelectList(MatriculaBLL.ListEnum("tipo"),matricula.tipo);
+            ViewBag.estado = new SelectList(MatriculaBLL.ListEnum("estado"),matricula.estado);
             ViewBag.idalumno = new SelectList(AlumnoBLL.List(), "idalumno", "nombres", matricula.idalumno);
             ViewBag.idmateria = new SelectList(MateriaBLL.List(), "idmateria", "nombre", matricula.idmateria);
             return View(matricula);
@@ -80,6 +80,9 @@ namespace PryEjercicio.Controllers
             {
                 return HttpNotFound();
             }
+            MatriculaBLL.TransforEnum(matricula);
+            ViewBag.tipo = new SelectList(MatriculaBLL.ListEnum("tipo"), matricula.tipo);
+            ViewBag.estado = new SelectList(MatriculaBLL.ListEnum("estado"), matricula.estado);
             ViewBag.idalumno = new SelectList(AlumnoBLL.List(), "idalumno", "nombres", matricula.idalumno);
             ViewBag.idmateria = new SelectList(MateriaBLL.List(), "idmateria", "nombre", matricula.idmateria);
             return View(matricula);
@@ -94,9 +97,13 @@ namespace PryEjercicio.Controllers
         {
             if (ModelState.IsValid)
             {
+                matricula = MatriculaBLL.TransforEnumCreate(matricula);
                 MatriculaBLL.Update(matricula);
                 return RedirectToAction("Index");
             }
+            MatriculaBLL.TransforEnum(matricula);
+            ViewBag.tipo = new SelectList(MatriculaBLL.ListEnum("tipo"), matricula.tipo);
+            ViewBag.estado = new SelectList(MatriculaBLL.ListEnum("estado"), matricula.estado);
             ViewBag.idalumno = new SelectList(AlumnoBLL.List(), "idalumno", "nombres", matricula.idalumno);
             ViewBag.idmateria = new SelectList(MateriaBLL.List(), "idmateria", "nombre", matricula.idmateria);
             return View(matricula);

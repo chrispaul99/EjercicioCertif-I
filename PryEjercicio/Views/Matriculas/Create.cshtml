@@ -34,7 +34,7 @@
     <div class="form-group">
         @Html.LabelFor(model => model.estado, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.DropDownList("estado", (IEnumerable<SelectListItem>)ViewBag.estado, "Seleccione el Estado de Matricula", htmlAttributes: new { @class = "form-control" })
+            @Html.DropDownList("estado",null, "Seleccione el Estado de Matricula", htmlAttributes: new { @class = "form-control" })
             @Html.ValidationMessageFor(model => model.estado, "", new { @class = "text-danger" })
         </div>
     </div>
@@ -42,7 +42,7 @@
     <div class="form-group">
         @Html.LabelFor(model => model.tipo, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.DropDownList("tipo", (IEnumerable<SelectListItem>)ViewBag.tipo, "Seleccione el Tipo de Matricula", htmlAttributes: new { @class = "form-control" })
+            @Html.DropDownList("tipo", null, "Seleccione el Tipo de Matricula", htmlAttributes: new { @class = "form-control" })
             @Html.ValidationMessageFor(model => model.tipo, "", new { @class = "text-danger" })
         </div>
     </div>
@@ -50,7 +50,7 @@
     <div class="form-group">
         @Html.LabelFor(model => model.idalumno, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.DropDownList("idalumno", (IEnumerable<SelectListItem>)ViewBag.idalumno, "Seleccione una Alumno", htmlAttributes: new { @class = "form-control" })
+            @Html.DropDownList("idalumno", null, "Seleccione una Alumno", htmlAttributes: new { @class = "form-control" })
             @Html.ValidationMessageFor(model => model.idalumno, "", new { @class = "text-danger" })
         </div>
     </div>
@@ -58,7 +58,7 @@
     <div class="form-group">
         @Html.LabelFor(model => model.idmateria, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.DropDownList("idmateria", (IEnumerable<SelectListItem>)ViewBag.idmateria, "Seleccione una Materia", htmlAttributes: new { @class = "form-control" })
+            @Html.DropDownList("idmateria", null, "Seleccione una Materia", htmlAttributes: new { @class = "form-control" })
             @Html.ValidationMessageFor(model => model.idmateria, "", new { @class = "text-danger" })
         </div>
     </div>
