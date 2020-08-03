@@ -112,12 +112,15 @@ namespace BEUEjercicio.Transactions
             Entities db = new Entities();
             return db.Alumno.Where(x => x.apellidos.ToLower().Contains(criterio)).ToList();
         }
-
+        public static List<Alumno> List(string criterio)
+        {
+            Entities db = new Entities();
+            return db.Alumno.Where(x => x.cedula.Contains(criterio)).ToList();
+        }
         private static Alumno GetAlumno(string cedula)
         {
             Entities db = new Entities();
             return db.Alumno.FirstOrDefault(x => x.cedula == cedula);
         }
-
     }
 }

@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BEUEjercicio", "..\BEUEjerc
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UIEejercicio", "..\UIEejercicio\UIEejercicio.csproj", "{7CA2BF5A-0634-4B0F-B83E-84F36B3C10A2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApiEscolastico", "..\WebApiEscolastico\WebApiEscolastico.csproj", "{F7A8A468-F261-443F-9D5C-2F8B612E366E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{7CA2BF5A-0634-4B0F-B83E-84F36B3C10A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7CA2BF5A-0634-4B0F-B83E-84F36B3C10A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7CA2BF5A-0634-4B0F-B83E-84F36B3C10A2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F7A8A468-F261-443F-9D5C-2F8B612E366E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F7A8A468-F261-443F-9D5C-2F8B612E366E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F7A8A468-F261-443F-9D5C-2F8B612E366E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F7A8A468-F261-443F-9D5C-2F8B612E366E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,0 +1,421 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Alumno">
+          <Key>
+            <PropertyRef Name="idalumno" />
+          </Key>
+          <Property Name="idalumno" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombres" Type="varchar" MaxLength="50" />
+          <Property Name="apellidos" Type="varchar" MaxLength="50" />
+          <Property Name="cedula" Type="varchar" MaxLength="13" />
+          <Property Name="fecha_nacimiento" Type="date" />
+          <Property Name="lugar_nacimiento" Type="varchar" MaxLength="50" />
+          <Property Name="sexo" Type="nchar" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="Area">
+          <Key>
+            <PropertyRef Name="idarea" />
+          </Key>
+          <Property Name="idarea" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="coordinador" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Calificacion">
+          <Key>
+            <PropertyRef Name="idcalificacion" />
+          </Key>
+          <Property Name="idcalificacion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="valor" Type="decimal" Precision="4" Scale="2" Nullable="false" />
+          <Property Name="fecha" Type="datetime" Nullable="false" />
+          <Property Name="unidad" Type="nchar" MaxLength="1" Nullable="false" />
+          <Property Name="idmatricula" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Carrera">
+          <Key>
+            <PropertyRef Name="idCarrera" />
+          </Key>
+          <Property Name="idCarrera" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="varchar(max)" Nullable="false" />
+          <Property Name="fecha_creacion" Type="date" Nullable="false" />
+          <Property Name="director" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="creditos_totales" Type="int" Nullable="false" />
+          <Property Name="tipo" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="descripcion" Type="varchar(max)" Nullable="false" />
+          <Property Name="mision" Type="varchar(max)" Nullable="false" />
+          <Property Name="vision" Type="varchar(max)" Nullable="false" />
+          <Property Name="modalidad" Type="nchar" MaxLength="1" Nullable="false" />
+          <Property Name="estatus" Type="nchar" MaxLength="1" Nullable="false" />
+          <Property Name="duracion" Type="int" Nullable="false" />
+          <Property Name="resolucion_ces" Type="varchar(max)" Nullable="false" />
+          <Property Name="semanas_periodo" Type="int" Nullable="false" />
+          <Property Name="requisitos" Type="varchar(max)" Nullable="false" />
+          <Property Name="escenarios_labo" Type="varchar(max)" Nullable="false" />
+          <Property Name="objeto_estudio" Type="varchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Materia">
+          <Key>
+            <PropertyRef Name="idmateria" />
+          </Key>
+          <Property Name="idmateria" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="75" Nullable="false" />
+          <Property Name="nrc" Type="nchar" MaxLength="5" Nullable="false" />
+          <Property Name="creditos" Type="smallint" Nullable="false" />
+          <Property Name="idarea" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Matricula">
+          <Key>
+            <PropertyRef Name="idmatricula" />
+          </Key>
+          <Property Name="idmatricula" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fecha" Type="datetime" Nullable="false" />
+          <Property Name="costo" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="estado" Type="nchar" MaxLength="1" Nullable="false" />
+          <Property Name="tipo" Type="nchar" MaxLength="1" Nullable="false" />
+          <Property Name="idalumno" Type="int" Nullable="false" />
+          <Property Name="idmateria" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Calificacion_Matricula">
+          <End Role="Matricula" Type="Self.Matricula" Multiplicity="1" />
+          <End Role="Calificacion" Type="Self.Calificacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Matricula">
+              <PropertyRef Name="idmatricula" />
+            </Principal>
+            <Dependent Role="Calificacion">
+              <PropertyRef Name="idmatricula" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Materia_Area">
+          <End Role="Area" Type="Self.Area" Multiplicity="1" />
+          <End Role="Materia" Type="Self.Materia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Area">
+              <PropertyRef Name="idarea" />
+            </Principal>
+            <Dependent Role="Materia">
+              <PropertyRef Name="idarea" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Matricula_Alumno">
+          <End Role="Alumno" Type="Self.Alumno" Multiplicity="1" />
+          <End Role="Matricula" Type="Self.Matricula" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Alumno">
+              <PropertyRef Name="idalumno" />
+            </Principal>
+            <Dependent Role="Matricula">
+              <PropertyRef Name="idalumno" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Matricula_Materia">
+          <End Role="Materia" Type="Self.Materia" Multiplicity="1" />
+          <End Role="Matricula" Type="Self.Matricula" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Materia">
+              <PropertyRef Name="idmateria" />
+            </Principal>
+            <Dependent Role="Matricula">
+              <PropertyRef Name="idmateria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ModelStoreContainer">
+          <EntitySet Name="Alumno" EntityType="Self.Alumno" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Area" EntityType="Self.Area" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Calificacion" EntityType="Self.Calificacion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Carrera" EntityType="Self.Carrera" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Materia" EntityType="Self.Materia" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Matricula" EntityType="Self.Matricula" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Calificacion_Matricula" Association="Self.FK_Calificacion_Matricula">
+            <End Role="Matricula" EntitySet="Matricula" />
+            <End Role="Calificacion" EntitySet="Calificacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Materia_Area" Association="Self.FK_Materia_Area">
+            <End Role="Area" EntitySet="Area" />
+            <End Role="Materia" EntitySet="Materia" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Matricula_Alumno" Association="Self.FK_Matricula_Alumno">
+            <End Role="Alumno" EntitySet="Alumno" />
+            <End Role="Matricula" EntitySet="Matricula" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Matricula_Materia" Association="Self.FK_Matricula_Materia">
+            <End Role="Materia" EntitySet="Materia" />
+            <End Role="Matricula" EntitySet="Matricula" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Alumno">
+          <Key>
+            <PropertyRef Name="idalumno" />
+          </Key>
+          <Property Name="idalumno" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombres" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="apellidos" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="cedula" Type="String" MaxLength="13" FixedLength="false" Unicode="false" />
+          <Property Name="fecha_nacimiento" Type="DateTime" Precision="0" />
+          <Property Name="lugar_nacimiento" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="sexo" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Matricula" Relationship="Self.FK_Matricula_Alumno" FromRole="Alumno" ToRole="Matricula" />
+        </EntityType>
+        <EntityType Name="Area">
+          <Key>
+            <PropertyRef Name="idarea" />
+          </Key>
+          <Property Name="idarea" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="coordinador" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Materia" Relationship="Self.FK_Materia_Area" FromRole="Area" ToRole="Materia" />
+        </EntityType>
+        <EntityType Name="Calificacion">
+          <Key>
+            <PropertyRef Name="idcalificacion" />
+          </Key>
+          <Property Name="idcalificacion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="valor" Type="Decimal" Precision="4" Scale="2" Nullable="false" />
+          <Property Name="fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="unidad" Type="String" MaxLength="1" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="idmatricula" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Matricula" Relationship="Self.FK_Calificacion_Matricula" FromRole="Calificacion" ToRole="Matricula" />
+        </EntityType>
+        <EntityType Name="Materia">
+          <Key>
+            <PropertyRef Name="idmateria" />
+          </Key>
+          <Property Name="idmateria" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" MaxLength="75" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="nrc" Type="String" MaxLength="5" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="creditos" Type="Int16" Nullable="false" />
+          <Property Name="idarea" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Area" Relationship="Self.FK_Materia_Area" FromRole="Materia" ToRole="Area" />
+          <NavigationProperty Name="Matricula" Relationship="Self.FK_Matricula_Materia" FromRole="Materia" ToRole="Matricula" />
+        </EntityType>
+        <EntityType Name="Matricula">
+          <Key>
+            <PropertyRef Name="idmatricula" />
+          </Key>
+          <Property Name="idmatricula" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="costo" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="estado" Type="String" MaxLength="1" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="tipo" Type="String" MaxLength="1" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="idalumno" Type="Int32" Nullable="false" />
+          <Property Name="idmateria" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Alumno" Relationship="Self.FK_Matricula_Alumno" FromRole="Matricula" ToRole="Alumno" />
+          <NavigationProperty Name="Calificacion" Relationship="Self.FK_Calificacion_Matricula" FromRole="Matricula" ToRole="Calificacion" />
+          <NavigationProperty Name="Materia" Relationship="Self.FK_Matricula_Materia" FromRole="Matricula" ToRole="Materia" />
+        </EntityType>
+        <Association Name="FK_Matricula_Alumno">
+          <End Role="Alumno" Type="Self.Alumno" Multiplicity="1" />
+          <End Role="Matricula" Type="Self.Matricula" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Alumno">
+              <PropertyRef Name="idalumno" />
+            </Principal>
+            <Dependent Role="Matricula">
+              <PropertyRef Name="idalumno" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Materia_Area">
+          <End Role="Area" Type="Self.Area" Multiplicity="1" />
+          <End Role="Materia" Type="Self.Materia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Area">
+              <PropertyRef Name="idarea" />
+            </Principal>
+            <Dependent Role="Materia">
+              <PropertyRef Name="idarea" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Calificacion_Matricula">
+          <End Role="Matricula" Type="Self.Matricula" Multiplicity="1" />
+          <End Role="Calificacion" Type="Self.Calificacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Matricula">
+              <PropertyRef Name="idmatricula" />
+            </Principal>
+            <Dependent Role="Calificacion">
+              <PropertyRef Name="idmatricula" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Matricula_Materia">
+          <End Role="Materia" Type="Self.Materia" Multiplicity="1" />
+          <End Role="Matricula" Type="Self.Matricula" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Materia">
+              <PropertyRef Name="idmateria" />
+            </Principal>
+            <Dependent Role="Matricula">
+              <PropertyRef Name="idmateria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Alumno" EntityType="Self.Alumno" />
+          <EntitySet Name="Area" EntityType="Self.Area" />
+          <EntitySet Name="Calificacion" EntityType="Self.Calificacion" />
+          <EntitySet Name="Materia" EntityType="Self.Materia" />
+          <EntitySet Name="Matricula" EntityType="Self.Matricula" />
+          <AssociationSet Name="FK_Matricula_Alumno" Association="Self.FK_Matricula_Alumno">
+            <End Role="Alumno" EntitySet="Alumno" />
+            <End Role="Matricula" EntitySet="Matricula" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Materia_Area" Association="Self.FK_Materia_Area">
+            <End Role="Area" EntitySet="Area" />
+            <End Role="Materia" EntitySet="Materia" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Calificacion_Matricula" Association="Self.FK_Calificacion_Matricula">
+            <End Role="Matricula" EntitySet="Matricula" />
+            <End Role="Calificacion" EntitySet="Calificacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Matricula_Materia" Association="Self.FK_Matricula_Materia">
+            <End Role="Materia" EntitySet="Materia" />
+            <End Role="Matricula" EntitySet="Matricula" />
+          </AssociationSet>
+          <EntitySet Name="Carrera" EntityType="Model.Carrera" />
+        </EntityContainer>
+        <EntityType Name="Carrera">
+          <Key>
+            <PropertyRef Name="idCarrera" />
+          </Key>
+          <Property Name="idCarrera" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="fecha_creacion" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="director" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="creditos_totales" Type="Int32" Nullable="false" />
+          <Property Name="tipo" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="descripcion" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="mision" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="vision" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="modalidad" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="estatus" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="duracion" Type="Int32" Nullable="false" />
+          <Property Name="resolucion_ces" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="semanas_periodo" Type="Int32" Nullable="false" />
+          <Property Name="requisitos" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="escenarios_labo" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="objeto_estudio" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="Entities">
+          <EntitySetMapping Name="Alumno">
+            <EntityTypeMapping TypeName="Model.Alumno">
+              <MappingFragment StoreEntitySet="Alumno">
+                <ScalarProperty Name="idalumno" ColumnName="idalumno" />
+                <ScalarProperty Name="nombres" ColumnName="nombres" />
+                <ScalarProperty Name="apellidos" ColumnName="apellidos" />
+                <ScalarProperty Name="cedula" ColumnName="cedula" />
+                <ScalarProperty Name="fecha_nacimiento" ColumnName="fecha_nacimiento" />
+                <ScalarProperty Name="lugar_nacimiento" ColumnName="lugar_nacimiento" />
+                <ScalarProperty Name="sexo" ColumnName="sexo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Area">
+            <EntityTypeMapping TypeName="Model.Area">
+              <MappingFragment StoreEntitySet="Area">
+                <ScalarProperty Name="idarea" ColumnName="idarea" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="coordinador" ColumnName="coordinador" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Calificacion">
+            <EntityTypeMapping TypeName="Model.Calificacion">
+              <MappingFragment StoreEntitySet="Calificacion">
+                <ScalarProperty Name="idcalificacion" ColumnName="idcalificacion" />
+                <ScalarProperty Name="valor" ColumnName="valor" />
+                <ScalarProperty Name="fecha" ColumnName="fecha" />
+                <ScalarProperty Name="unidad" ColumnName="unidad" />
+                <ScalarProperty Name="idmatricula" ColumnName="idmatricula" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Materia">
+            <EntityTypeMapping TypeName="Model.Materia">
+              <MappingFragment StoreEntitySet="Materia">
+                <ScalarProperty Name="idmateria" ColumnName="idmateria" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="nrc" ColumnName="nrc" />
+                <ScalarProperty Name="creditos" ColumnName="creditos" />
+                <ScalarProperty Name="idarea" ColumnName="idarea" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Matricula">
+            <EntityTypeMapping TypeName="Model.Matricula">
+              <MappingFragment StoreEntitySet="Matricula">
+                <ScalarProperty Name="idmatricula" ColumnName="idmatricula" />
+                <ScalarProperty Name="fecha" ColumnName="fecha" />
+                <ScalarProperty Name="costo" ColumnName="costo" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="tipo" ColumnName="tipo" />
+                <ScalarProperty Name="idalumno" ColumnName="idalumno" />
+                <ScalarProperty Name="idmateria" ColumnName="idmateria" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Carrera">
+            <EntityTypeMapping TypeName="Model.Carrera">
+              <MappingFragment StoreEntitySet="Carrera">
+                <ScalarProperty Name="objeto_estudio" ColumnName="objeto_estudio" />
+                <ScalarProperty Name="escenarios_labo" ColumnName="escenarios_labo" />
+                <ScalarProperty Name="requisitos" ColumnName="requisitos" />
+                <ScalarProperty Name="semanas_periodo" ColumnName="semanas_periodo" />
+                <ScalarProperty Name="resolucion_ces" ColumnName="resolucion_ces" />
+                <ScalarProperty Name="duracion" ColumnName="duracion" />
+                <ScalarProperty Name="estatus" ColumnName="estatus" />
+                <ScalarProperty Name="modalidad" ColumnName="modalidad" />
+                <ScalarProperty Name="vision" ColumnName="vision" />
+                <ScalarProperty Name="mision" ColumnName="mision" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="tipo" ColumnName="tipo" />
+                <ScalarProperty Name="creditos_totales" ColumnName="creditos_totales" />
+                <ScalarProperty Name="director" ColumnName="director" />
+                <ScalarProperty Name="fecha_creacion" ColumnName="fecha_creacion" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="idCarrera" ColumnName="idCarrera" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

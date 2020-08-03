@@ -35,7 +35,23 @@ namespace BEUEjercicio.Transactions
                 }
             }
         }
-
+        private static void Config(Matricula a, Materia mt)
+        {
+            a.fecha = DateTime.Now;
+            a.estado = "1"; //Creada
+            if (a.tipo.Equals("P"))
+            {
+                a.costo = 0;
+            }
+            else if (a.tipo.Equals("S"))
+            {
+                a.costo = (decimal)(12.25 * mt.creditos);
+            }
+            else
+            {
+                a.costo = (decimal)(24.50 * mt.creditos);
+            }
+        }
         public static Matricula Get(int? id)
         {
             Entities db = new Entities();
@@ -163,7 +179,11 @@ namespace BEUEjercicio.Transactions
             //Los metodos del EntityFramework se denomina Linq, 
             //y la evluacion de condiciones lambda
         }
-
+        public static List<Matricula> List(int id)
+        {
+            Entities db = new Entities();
+            return db.Matricula.Where(x => x.Alumno.idalumno == id).ToList();
+        }
         /*
         private static List<Matricula> GetMatriculas(String criterio)
         {

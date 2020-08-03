@@ -92,7 +92,19 @@ namespace BEUEjercicio.Transactions
             //Los metodos del EntityFramework se denomina Linq, 
             //y la evluacion de condiciones lambda
         }
-
+        public static List<Materia> ListToNames()
+        {
+            Entities db = new Entities();
+            List<Materia> result = new List<Materia>();
+            db.Materia.ToList().ForEach(x =>
+                result.Add(
+                    new Materia
+                    {
+                        nombre = x.nrc + "-" + x.nombre,
+                        idmateria = x.idmateria
+                    }));
+            return result;
+        }
         /*
         private static List<Materia> GetMaterias(string criterio)
         {
