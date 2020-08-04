@@ -58,5 +58,28 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Carrera">
+      <EntityTypeMapping TypeName="DBModel.Carrera">
+        <MappingFragment StoreEntitySet="Carrera">
+          <ScalarProperty Name="objeto_estudio" ColumnName="objeto_estudio" />
+          <ScalarProperty Name="escenarios_labo" ColumnName="escenarios_labo" />
+          <ScalarProperty Name="requisitos" ColumnName="requisitos" />
+          <ScalarProperty Name="semanas_periodo" ColumnName="semanas_periodo" />
+          <ScalarProperty Name="resolucion_ces" ColumnName="resolucion_ces" />
+          <ScalarProperty Name="duracion" ColumnName="duracion" />
+          <ScalarProperty Name="estatus" ColumnName="estatus" />
+          <ScalarProperty Name="modalidad" ColumnName="modalidad" />
+          <ScalarProperty Name="vision" ColumnName="vision" />
+          <ScalarProperty Name="mision" ColumnName="mision" />
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+          <ScalarProperty Name="tipo" ColumnName="tipo" />
+          <ScalarProperty Name="creditos_totales" ColumnName="creditos_totales" />
+          <ScalarProperty Name="director" ColumnName="director" />
+          <ScalarProperty Name="fecha_creacion" ColumnName="fecha_creacion" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="idCarrera" ColumnName="idCarrera" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

@@ -4,18 +4,18 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="DBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="DBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Alumno">
           <Key>
             <PropertyRef Name="idalumno" />
           </Key>
           <Property Name="idalumno" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="nombres" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="apellidos" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="cedula" Type="varchar" MaxLength="13" Nullable="false" />
-          <Property Name="fecha_nacimiento" Type="date" Nullable="false" />
-          <Property Name="lugar_nacimiento" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="sexo" Type="nchar" MaxLength="1" Nullable="false" />
+          <Property Name="nombres" Type="varchar" MaxLength="50" />
+          <Property Name="apellidos" Type="varchar" MaxLength="50" />
+          <Property Name="cedula" Type="varchar" MaxLength="13" />
+          <Property Name="fecha_nacimiento" Type="date" />
+          <Property Name="lugar_nacimiento" Type="varchar" MaxLength="50" />
+          <Property Name="sexo" Type="nchar" MaxLength="1" />
         </EntityType>
         <EntityType Name="Area">
           <Key>
@@ -34,6 +34,28 @@
           <Property Name="fecha" Type="datetime" Nullable="false" />
           <Property Name="unidad" Type="nchar" MaxLength="1" Nullable="false" />
           <Property Name="idmatricula" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Carrera">
+          <Key>
+            <PropertyRef Name="idCarrera" />
+          </Key>
+          <Property Name="idCarrera" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="varchar(max)" Nullable="false" />
+          <Property Name="fecha_creacion" Type="date" Nullable="false" />
+          <Property Name="director" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="creditos_totales" Type="int" Nullable="false" />
+          <Property Name="tipo" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="descripcion" Type="varchar(max)" Nullable="false" />
+          <Property Name="mision" Type="varchar(max)" Nullable="false" />
+          <Property Name="vision" Type="varchar(max)" Nullable="false" />
+          <Property Name="modalidad" Type="nchar" MaxLength="1" Nullable="false" />
+          <Property Name="estatus" Type="nchar" MaxLength="1" Nullable="false" />
+          <Property Name="duracion" Type="int" Nullable="false" />
+          <Property Name="resolucion_ces" Type="varchar(max)" Nullable="false" />
+          <Property Name="semanas_periodo" Type="int" Nullable="false" />
+          <Property Name="requisitos" Type="varchar(max)" Nullable="false" />
+          <Property Name="escenarios_labo" Type="varchar(max)" Nullable="false" />
+          <Property Name="objeto_estudio" Type="varchar(max)" Nullable="false" />
         </EntityType>
         <EntityType Name="Materia">
           <Key>
@@ -109,6 +131,7 @@
           <EntitySet Name="Alumno" EntityType="Self.Alumno" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Area" EntityType="Self.Area" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Calificacion" EntityType="Self.Calificacion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Carrera" EntityType="Self.Carrera" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Materia" EntityType="Self.Materia" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Matricula" EntityType="Self.Matricula" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Calificacion_Matricula" Association="Self.FK_Calificacion_Matricula">
@@ -128,8 +151,7 @@
             <End Role="Matricula" EntitySet="Matricula" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="DBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -138,12 +160,12 @@
             <PropertyRef Name="idalumno" />
           </Key>
           <Property Name="idalumno" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="nombres" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="apellidos" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="cedula" Type="String" MaxLength="13" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="fecha_nacimiento" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="lugar_nacimiento" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="sexo" Type="String" MaxLength="1" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="nombres" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="apellidos" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="cedula" Type="String" MaxLength="13" FixedLength="false" Unicode="false" />
+          <Property Name="fecha_nacimiento" Type="DateTime" Precision="0" />
+          <Property Name="lugar_nacimiento" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="sexo" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
           <NavigationProperty Name="Matricula" Relationship="Self.FK_Matricula_Alumno" FromRole="Alumno" ToRole="Matricula" />
         </EntityType>
         <EntityType Name="Area">
@@ -263,7 +285,30 @@
             <End Role="Materia" EntitySet="Materia" />
             <End Role="Matricula" EntitySet="Matricula" />
           </AssociationSet>
+          <EntitySet Name="Carrera" EntityType="DBModel.Carrera" />
         </EntityContainer>
+        <EntityType Name="Carrera">
+          <Key>
+            <PropertyRef Name="idCarrera" />
+          </Key>
+          <Property Name="idCarrera" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="fecha_creacion" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="director" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="creditos_totales" Type="Int32" Nullable="false" />
+          <Property Name="tipo" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="descripcion" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="mision" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="vision" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="modalidad" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="estatus" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="duracion" Type="Int32" Nullable="false" />
+          <Property Name="resolucion_ces" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="semanas_periodo" Type="Int32" Nullable="false" />
+          <Property Name="requisitos" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="escenarios_labo" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="objeto_estudio" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -324,6 +369,29 @@
                 <ScalarProperty Name="tipo" ColumnName="tipo" />
                 <ScalarProperty Name="idalumno" ColumnName="idalumno" />
                 <ScalarProperty Name="idmateria" ColumnName="idmateria" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Carrera">
+            <EntityTypeMapping TypeName="DBModel.Carrera">
+              <MappingFragment StoreEntitySet="Carrera">
+                <ScalarProperty Name="objeto_estudio" ColumnName="objeto_estudio" />
+                <ScalarProperty Name="escenarios_labo" ColumnName="escenarios_labo" />
+                <ScalarProperty Name="requisitos" ColumnName="requisitos" />
+                <ScalarProperty Name="semanas_periodo" ColumnName="semanas_periodo" />
+                <ScalarProperty Name="resolucion_ces" ColumnName="resolucion_ces" />
+                <ScalarProperty Name="duracion" ColumnName="duracion" />
+                <ScalarProperty Name="estatus" ColumnName="estatus" />
+                <ScalarProperty Name="modalidad" ColumnName="modalidad" />
+                <ScalarProperty Name="vision" ColumnName="vision" />
+                <ScalarProperty Name="mision" ColumnName="mision" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="tipo" ColumnName="tipo" />
+                <ScalarProperty Name="creditos_totales" ColumnName="creditos_totales" />
+                <ScalarProperty Name="director" ColumnName="director" />
+                <ScalarProperty Name="fecha_creacion" ColumnName="fecha_creacion" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="idCarrera" ColumnName="idCarrera" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

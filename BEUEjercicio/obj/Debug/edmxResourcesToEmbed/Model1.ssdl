@@ -5,12 +5,12 @@
       <PropertyRef Name="idalumno" />
     </Key>
     <Property Name="idalumno" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="nombres" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="apellidos" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="cedula" Type="varchar" MaxLength="13" Nullable="false" />
-    <Property Name="fecha_nacimiento" Type="date" Nullable="false" />
-    <Property Name="lugar_nacimiento" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="sexo" Type="nchar" MaxLength="1" Nullable="false" />
+    <Property Name="nombres" Type="varchar" MaxLength="50" />
+    <Property Name="apellidos" Type="varchar" MaxLength="50" />
+    <Property Name="cedula" Type="varchar" MaxLength="13" />
+    <Property Name="fecha_nacimiento" Type="date" />
+    <Property Name="lugar_nacimiento" Type="varchar" MaxLength="50" />
+    <Property Name="sexo" Type="nchar" MaxLength="1" />
   </EntityType>
   <EntityType Name="Area">
     <Key>
@@ -29,6 +29,28 @@
     <Property Name="fecha" Type="datetime" Nullable="false" />
     <Property Name="unidad" Type="nchar" MaxLength="1" Nullable="false" />
     <Property Name="idmatricula" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Carrera">
+    <Key>
+      <PropertyRef Name="idCarrera" />
+    </Key>
+    <Property Name="idCarrera" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nombre" Type="varchar(max)" Nullable="false" />
+    <Property Name="fecha_creacion" Type="date" Nullable="false" />
+    <Property Name="director" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="creditos_totales" Type="int" Nullable="false" />
+    <Property Name="tipo" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="descripcion" Type="varchar(max)" Nullable="false" />
+    <Property Name="mision" Type="varchar(max)" Nullable="false" />
+    <Property Name="vision" Type="varchar(max)" Nullable="false" />
+    <Property Name="modalidad" Type="nchar" MaxLength="1" Nullable="false" />
+    <Property Name="estatus" Type="nchar" MaxLength="1" Nullable="false" />
+    <Property Name="duracion" Type="int" Nullable="false" />
+    <Property Name="resolucion_ces" Type="varchar(max)" Nullable="false" />
+    <Property Name="semanas_periodo" Type="int" Nullable="false" />
+    <Property Name="requisitos" Type="varchar(max)" Nullable="false" />
+    <Property Name="escenarios_labo" Type="varchar(max)" Nullable="false" />
+    <Property Name="objeto_estudio" Type="varchar(max)" Nullable="false" />
   </EntityType>
   <EntityType Name="Materia">
     <Key>
@@ -104,6 +126,7 @@
     <EntitySet Name="Alumno" EntityType="Self.Alumno" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Area" EntityType="Self.Area" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Calificacion" EntityType="Self.Calificacion" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Carrera" EntityType="Self.Carrera" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Materia" EntityType="Self.Materia" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Matricula" EntityType="Self.Matricula" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="FK_Calificacion_Matricula" Association="Self.FK_Calificacion_Matricula">

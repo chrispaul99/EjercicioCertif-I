@@ -23,3 +23,4 @@ D:\Respaldos ASUS\Respaldo\Desktop\ESPE\MATERIA\6º NIVEL\CERTIFICACION I\MVC\Ej
 D:\Respaldos ASUS\Respaldo\Desktop\ESPE\MATERIA\6º NIVEL\CERTIFICACION I\MVC\EjercicioCertif-I\BEUEjercicio\bin\Debug\System.Web.WebPages.xml
 D:\Respaldos ASUS\Respaldo\Desktop\ESPE\MATERIA\6º NIVEL\CERTIFICACION I\MVC\EjercicioCertif-I\BEUEjercicio\bin\Debug\System.Web.WebPages.Deployment.xml
 D:\Respaldos ASUS\Respaldo\Desktop\ESPE\MATERIA\6º NIVEL\CERTIFICACION I\MVC\EjercicioCertif-I\BEUEjercicio\bin\Debug\System.Web.WebPages.Razor.xml
+D:\Respaldos ASUS\Respaldo\Desktop\ESPE\MATERIA\6º NIVEL\CERTIFICACION I\MVC\EjercicioCertif-I\BEUEjercicio\obj\Debug\BEUEjercicio.csprojAssemblyReference.cache

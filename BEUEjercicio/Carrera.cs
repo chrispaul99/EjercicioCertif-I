@@ -11,9 +11,11 @@ namespace BEUEjercicio
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Carrera
     {
+        [ScaffoldColumn(false)]
         public int idCarrera { get; set; }
         public string nombre { get; set; }
         public System.DateTime fecha_creacion { get; set; }
