@@ -23,6 +23,8 @@ namespace BEUEjercicio.Transactions
                 {
                     try
                     {
+                        Materia mt = db.Materia.Find(m.idmateria);
+                        Config(m, mt);
                         db.Matricula.Add(m);
                         db.SaveChanges();
                         transaction.Commit();
@@ -173,6 +175,7 @@ namespace BEUEjercicio.Transactions
             {
                 TransforEnum(i);
             }
+            decimal total = (decimal)db.Matricula.Sum(x => x.costo);
             return db.Matricula.ToList();
 
 

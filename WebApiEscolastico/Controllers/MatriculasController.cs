@@ -18,12 +18,13 @@ namespace WebApiEscolastico.Controllers
     public class MatriculasController : ApiController
     {
 
-        public IHttpActionResult Post(Alumno alumno)
+        public IHttpActionResult Post(Matricula matricula)
         {
             try
             {
-                AlumnoBLL.Create(alumno);
-                return Content(HttpStatusCode.Created, "Alumno creado correctamente");
+                matricula.idmateria = matricula.Materia.idmateria;
+                MatriculaBLL.Create(matricula);
+                return Content(HttpStatusCode.Created, "Matricula creada correctamente");
             }
             catch (Exception ex)
             {
