@@ -22,7 +22,6 @@ namespace WebApiEscolastico.Controllers
         {
             try
             {
-                matricula.idmateria = matricula.Materia.idmateria;
                 MatriculaBLL.Create(matricula);
                 return Content(HttpStatusCode.Created, "Matricula creada correctamente");
             }

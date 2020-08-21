@@ -12,6 +12,17 @@
     <Property Name="lugar_nacimiento" Type="varchar" MaxLength="50" />
     <Property Name="sexo" Type="nchar" MaxLength="1" />
   </EntityType>
+  <EntityType Name="Aporte">
+    <Key>
+      <PropertyRef Name="idAporte" />
+    </Key>
+    <Property Name="idAporte" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="puntaje" Type="decimal" Precision="4" Scale="2" Nullable="false" />
+    <Property Name="valor" Type="decimal" Precision="4" Scale="2" Nullable="false" />
+    <Property Name="ponderado" Type="decimal" Precision="4" Scale="2" Nullable="false" />
+    <Property Name="idCalificacion" Type="int" Nullable="false" />
+    <Property Name="nombre" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
   <EntityType Name="Area">
     <Key>
       <PropertyRef Name="idarea" />
@@ -35,9 +46,9 @@
       <PropertyRef Name="idCarrera" />
     </Key>
     <Property Name="idCarrera" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="nombre" Type="varchar(max)" Nullable="false" />
+    <Property Name="nombre" Type="varchar" MaxLength="100" Nullable="false" />
     <Property Name="fecha_creacion" Type="date" Nullable="false" />
-    <Property Name="director" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="director" Type="varchar(max)" Nullable="false" />
     <Property Name="creditos_totales" Type="int" Nullable="false" />
     <Property Name="tipo" Type="varchar" MaxLength="100" Nullable="false" />
     <Property Name="descripcion" Type="varchar(max)" Nullable="false" />
@@ -74,6 +85,20 @@
     <Property Name="idalumno" Type="int" Nullable="false" />
     <Property Name="idmateria" Type="int" Nullable="false" />
   </EntityType>
+  <Association Name="FK_Aporte_Calificacion">
+    <End Role="Calificacion" Type="Self.Calificacion" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Aporte" Type="Self.Aporte" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Calificacion">
+        <PropertyRef Name="idcalificacion" />
+      </Principal>
+      <Dependent Role="Aporte">
+        <PropertyRef Name="idCalificacion" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Calificacion_Matricula">
     <End Role="Matricula" Type="Self.Matricula" Multiplicity="1" />
     <End Role="Calificacion" Type="Self.Calificacion" Multiplicity="*" />
@@ -124,11 +149,16 @@
   </Association>
   <EntityContainer Name="DBModelStoreContainer">
     <EntitySet Name="Alumno" EntityType="Self.Alumno" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Aporte" EntityType="Self.Aporte" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Area" EntityType="Self.Area" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Calificacion" EntityType="Self.Calificacion" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Carrera" EntityType="Self.Carrera" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Materia" EntityType="Self.Materia" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Matricula" EntityType="Self.Matricula" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Aporte_Calificacion" Association="Self.FK_Aporte_Calificacion">
+      <End Role="Calificacion" EntitySet="Calificacion" />
+      <End Role="Aporte" EntitySet="Aporte" />
+    </AssociationSet>
     <AssociationSet Name="FK_Calificacion_Matricula" Association="Self.FK_Calificacion_Matricula">
       <End Role="Matricula" EntitySet="Matricula" />
       <End Role="Calificacion" EntitySet="Calificacion" />

@@ -9,11 +9,10 @@
 
 namespace BEUEjercicio
 {
-    using Foolproof;
+    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class Materia
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -21,25 +20,16 @@ namespace BEUEjercicio
         {
             this.Matricula = new HashSet<Matricula>();
         }
-        [ScaffoldColumn(false)]
+    
         public int idmateria { get; set; }
-        [DataType(DataType.Text)]
-        [Required(ErrorMessage = "El nombre es requerido"), MaxLength(55)]
-        [Display(Name = "Nombre")]
         public string nombre { get; set; }
-        [Range(1000,9999,ErrorMessage ="El NRC debe ser entre 1000 y 9999")]
-        [Required(ErrorMessage = "El NRC es requerido")]
-        [Display(Name = "NRC")]
         public string nrc { get; set; }
-        [Range(2, 10, ErrorMessage = "El número de créditos debe ser entre 2 y 10")]
-        [Required(ErrorMessage = "Los creditos  son requeridos")]
-        [Display(Name = "Creditos")]
         public short creditos { get; set; }
-        [Required(ErrorMessage = "El Área es requerida")]
-        [Display(Name = "Área")]
         public int idarea { get; set; }
+    
         public virtual Area Area { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        [JsonIgnore]
         public virtual ICollection<Matricula> Matricula { get; set; }
     }
 }

@@ -11,41 +11,23 @@ namespace BEUEjercicio
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class Alumno
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Alumno()
         {
             this.Matricula = new HashSet<Matricula>();
-        } 
-        [ScaffoldColumn(false)]
+        }
+    
         public int idalumno { get; set; }
-
-        [DataType(DataType.Text)]
-        [Required(ErrorMessage = " Los nombres son requeridos"),MaxLength(55)]
-        [Display(Name = "Nombres")]
         public string nombres { get; set; }
-        [DataType(DataType.Text)]
-        [Required(ErrorMessage = " Los apellidos son requeridos"), MaxLength(55)]
-        [Display(Name = "Apellidos")]
         public string apellidos { get; set; }
-        [DataType(DataType.Text)]
-        [Required(ErrorMessage = " La cedula es requerida"), MaxLength(55)]
-        [Display(Name = "Cédula")]
         public string cedula { get; set; }
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        [Display(Name = "Fecha de Nacimiento")]
-        public System.DateTime fecha_nacimiento { get; set; }
-        [DataType(DataType.Text)]
-        [Display(Name = "Lugar de Nacimiento")]
+        public Nullable<System.DateTime> fecha_nacimiento { get; set; }
         public string lugar_nacimiento { get; set; }
-        [Display(Name = "Sexo")]
         public string sexo { get; set; }
-        
-
+    
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Matricula> Matricula { get; set; }
     }

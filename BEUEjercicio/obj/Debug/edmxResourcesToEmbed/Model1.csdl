@@ -32,6 +32,7 @@
     <Property Name="unidad" Type="String" MaxLength="1" FixedLength="true" Unicode="true" Nullable="false" />
     <Property Name="idmatricula" Type="Int32" Nullable="false" />
     <NavigationProperty Name="Matricula" Relationship="Self.FK_Calificacion_Matricula" FromRole="Calificacion" ToRole="Matricula" />
+    <NavigationProperty Name="Aporte" Relationship="DBModel.FK_Aporte_Calificacion" FromRole="Calificacion" ToRole="Aporte" />
   </EntityType>
   <EntityType Name="Materia">
     <Key>
@@ -131,15 +132,20 @@
       <End Role="Matricula" EntitySet="Matricula" />
     </AssociationSet>
     <EntitySet Name="Carrera" EntityType="DBModel.Carrera" />
+    <EntitySet Name="Aporte" EntityType="DBModel.Aporte" />
+    <AssociationSet Name="FK_Aporte_Calificacion" Association="DBModel.FK_Aporte_Calificacion">
+      <End Role="Calificacion" EntitySet="Calificacion" />
+      <End Role="Aporte" EntitySet="Aporte" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="Carrera">
     <Key>
       <PropertyRef Name="idCarrera" />
     </Key>
     <Property Name="idCarrera" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="nombre" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="nombre" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
     <Property Name="fecha_creacion" Type="DateTime" Nullable="false" Precision="0" />
-    <Property Name="director" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="director" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
     <Property Name="creditos_totales" Type="Int32" Nullable="false" />
     <Property Name="tipo" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
     <Property Name="descripcion" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
@@ -154,4 +160,30 @@
     <Property Name="escenarios_labo" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
     <Property Name="objeto_estudio" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
   </EntityType>
+  <EntityType Name="Aporte">
+    <Key>
+      <PropertyRef Name="idAporte" />
+    </Key>
+    <Property Name="idAporte" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="puntaje" Type="Decimal" Nullable="false" Precision="4" Scale="2" />
+    <Property Name="valor" Type="Decimal" Nullable="false" Precision="4" Scale="2" />
+    <Property Name="ponderado" Type="Decimal" Nullable="false" Precision="4" Scale="2" />
+    <Property Name="idCalificacion" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Calificacion" Relationship="DBModel.FK_Aporte_Calificacion" FromRole="Aporte" ToRole="Calificacion" />
+    <Property Name="nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <Association Name="FK_Aporte_Calificacion">
+    <End Type="DBModel.Calificacion" Role="Calificacion" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="DBModel.Aporte" Role="Aporte" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Calificacion">
+        <PropertyRef Name="idcalificacion" />
+      </Principal>
+      <Dependent Role="Aporte">
+        <PropertyRef Name="idCalificacion" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

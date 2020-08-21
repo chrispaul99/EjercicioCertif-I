@@ -13,20 +13,16 @@ namespace BEUEjercicio
     using System;
     using System.Collections.Generic;
     
-    public partial class Area
+    public partial class Aporte
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Area()
-        {
-            this.Materia = new HashSet<Materia>();
-        }
-    
-        public int idarea { get; set; }
+        public int idAporte { get; set; }
+        public decimal puntaje { get; set; }
+        public decimal valor { get; set; }
+        public decimal ponderado { get; set; }
+        public int idCalificacion { get; set; }
         public string nombre { get; set; }
-        public string coordinador { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+
         [JsonIgnore]
-        public virtual ICollection<Materia> Materia { get; set; }
+        public virtual Calificacion Calificacion { get; set; }
     }
 }

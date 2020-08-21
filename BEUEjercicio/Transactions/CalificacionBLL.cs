@@ -4,12 +4,12 @@ using System.Linq;
 
 namespace BEUEjercicio.Transactions
 {
-    public class MatriculaBLL
+    public class CalificacionBLL
     {
         //BLL Bussiness Logic Layer
         //Capa de Logica del Negocio
 
-        public static void Create(Matricula m)
+        public static void Create(Calificacion m,bool ban)
         {
             using (Entities db = new Entities())
             {
@@ -17,9 +17,8 @@ namespace BEUEjercicio.Transactions
                 {
                     try
                     {
-                        Materia mt = db.Materia.Find(m.idmateria);
-                        Config(m, mt);
-                        db.Matricula.Add(m);
+                        Config(m,ban);
+                        db.Calificacion.Add(m);
                         db.SaveChanges();
                         transaction.Commit();
                     }
@@ -31,30 +30,30 @@ namespace BEUEjercicio.Transactions
                 }
             }
         }
-        private static void Config(Matricula a, Materia mt)
+        private static void Config(Calificacion a, bool byForeach)
         {
             a.fecha = DateTime.Now;
-            a.estado = "1"; //Creada
-            if (a.tipo.Equals("P"))
+            a.valor = 0;
+            if (byForeach)
             {
-                a.costo = 0;
+                foreach (var ap in a.Aporte)
+                {
+                    ap.puntaje = (ap.valor * ap.ponderado) / 20;
+                    a.valor += ap.puntaje;
+                }
+                return;
             }
-            else if (a.tipo.Equals("S"))
-            {
-                a.costo = (decimal)(12.25 * mt.creditos);
-            }
-            else
-            {
-                a.costo = (decimal)(24.50 * mt.creditos);
-            }
+            a.Aporte.ToList().ForEach(ap => ap.puntaje =(ap.valor * ap.ponderado) / 20);
+            a.valor = a.Aporte.Sum(ap => ap.puntaje);
         }
-        public static Matricula Get(int? id)
+        public static Calificacion Get(int? id)
         {
             Entities db = new Entities();
-            return db.Matricula.Find(id);
+            return db.Calificacion.Find(id);
+            
         }
 
-        public static void Update(Matricula matricula)
+        public static void Update(Calificacion Calificacion)
         {
             using (Entities db = new Entities())
             {
@@ -62,8 +61,8 @@ namespace BEUEjercicio.Transactions
                 {
                     try
                     {
-                        db.Matricula.Attach(matricula);
-                        db.Entry(matricula).State = System.Data.Entity.EntityState.Modified;
+                        db.Calificacion.Attach(Calificacion);
+                        db.Entry(Calificacion).State = System.Data.Entity.EntityState.Modified;
                         db.SaveChanges();
                         transaction.Commit();
                     }
@@ -84,8 +83,8 @@ namespace BEUEjercicio.Transactions
                 {
                     try
                     {
-                        Matricula matricula = db.Matricula.Find(id);
-                        db.Entry(matricula).State = System.Data.Entity.EntityState.Deleted;
+                        Calificacion Calificacion = db.Calificacion.Find(id);
+                        db.Entry(Calificacion).State = System.Data.Entity.EntityState.Deleted;
                         db.SaveChanges();
                         transaction.Commit();
                     }
@@ -96,16 +95,17 @@ namespace BEUEjercicio.Transactions
                     }
                 }
             }
-        }
-        public static List<Matricula> List()
+        } 
+        public static List<Calificacion> List()
         {
             Entities db = new Entities();
-            return db.Matricula.ToList();
+            return db.Calificacion.ToList();
+
         }
-        public static List<Matricula> List(int id)
+        public static List<Calificacion> List(int id)
         {
             Entities db = new Entities();
-            return db.Matricula.Where(x => x.Alumno.idalumno == id).ToList();
+            return db.Calificacion.Where(x => x.idmatricula == id).ToList();
         }
     }
 }
